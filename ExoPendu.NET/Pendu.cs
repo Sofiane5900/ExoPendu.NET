@@ -77,7 +77,10 @@ namespace ExoPendu.NET
                     // A chaque itération, verifie que _charArray contiens le caractére de la saisie de l'user, et affiche un message.
                     if( _charArray[i] == c)
                     {
-                        Console.WriteLine("Ce caractére est valide, oui oui!");
+                        // Je remplace la saisie de l'utilisateur par la lettre correspondante dans le tableau 
+                        _masqueArray[i] = c;
+                        // Je convertis mon tableau en une chaine de caractére pour pouvoir l'afficher.
+                        Console.WriteLine($"Le mot caché contient bien ce caractére {new string(_masqueArray)}");
                     }
 
                 }

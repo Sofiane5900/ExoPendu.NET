@@ -15,26 +15,22 @@ namespace ExoPendu.NET
     {
         private string _masque;
         private int _nombreEssai;
-        private string motCacher;
-        private string _lettresTrouver;
+        private string _motCacher;
         private char[] _charArray;
         private char[] _masqueArray;
 
 
         public string Masque { get => _masque; set => Masque = _masque; }
-        public int NombreEssai { get => _nombreEssai; set => NombreEssai = _nombreEssai; }
-        public string LettresTrouver { get => _lettresTrouver; set => _lettresTrouver = value; }
+        public int NombreEssai { get => _nombreEssai; set => _nombreEssai = value; }
 
-     
+        public string MotCacher { get => _motCacher; set => _motCacher = value; }
       
 
         public Pendu()
         {
-            
-            
-            // L'utilisateur a 10 vies.
+            // L'utilisateur a 10 essais par default.
             _nombreEssai = 10;
-            // Je crée une nouvelle chaine de caractére en utilisant les caractéres dans CharArray
+            
   ;
 
         }
@@ -45,7 +41,7 @@ namespace ExoPendu.NET
             Mot mot = new Mot();
             // J'utilise la méthode GenererMot() pour génerer un mot aléatoire dans ma variable motRandom
             string _motATrouver = mot.GenererMot();
-            motCacher = _motATrouver;
+            MotCacher = _motATrouver;
             // Je transforme mon _motATrouver en une variable tableau de type char
             _charArray = _motATrouver.ToCharArray();
             // Je déclare que _masqueArray est un nouveau tableau de caractères de la meme longueur que _charArray.Length 
@@ -79,8 +75,10 @@ namespace ExoPendu.NET
                     {
                         // Je remplace la saisie de l'utilisateur par la lettre correspondante dans le tableau 
                         _masqueArray[i] = c;
+                        NombreEssai--;
                         // Je convertis mon tableau en une chaine de caractére pour pouvoir l'afficher.
                         Console.WriteLine($"Le mot caché contient bien ce caractére {new string(_masqueArray)}");
+                        AffichageEtat();
                     }
 
                 }
@@ -91,6 +89,11 @@ namespace ExoPendu.NET
         public void TestWin()
         {
 
+        }
+
+        public void AffichageEtat()
+        {
+            Console.WriteLine($"Il vous reste {NombreEssai} essais.");
         }
     }
 }

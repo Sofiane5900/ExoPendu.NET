@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 
@@ -14,17 +15,21 @@ namespace ExoPendu.NET
         private string _masque;
         private int _nombreEssai;
         private string motCacher;
-        private string _lettresEssayees;
+        private string _lettreRestantes;
+        private char[] charArray; 
 
-        public string masque { get => _masque; set => masque = _masque; }
-        public int nombreEssai { get => _nombreEssai; set => nombreEssai = _nombreEssai; }
+        public string Masque { get => _masque; set => Masque = _masque; }
+        public int NombreEssai { get => _nombreEssai; set => NombreEssai = _nombreEssai; }
+        public string LettreRestantes { get => _lettreRestantes; set => _lettreRestantes = value; }
 
+      
 
         public Pendu()
         {
             GenererMasque();
-            _masque = masque;
-            _nombreEssai = nombreEssai;
+            _masque = Masque;
+            _nombreEssai = NombreEssai;
+            _lettreRestantes= LettreRestantes;
         }
 
         void GenererMasque()
@@ -33,17 +38,37 @@ namespace ExoPendu.NET
             Mot mot = new Mot();
             // J'utilise la méthode GenererMot() pour génerer un mot aléatoire dans ma variable motRandom
             string _motATrouver = mot.GenererMot();
-            // Je déclare que mon masque est un new string "*" de la taille de mon motRandom
-            motCacher = new string('*', _motATrouver.Length);
+            // Je transforme mon _motATrouver en une variable tableau de type char
+            char[] charArray = _motATrouver.ToCharArray();
         }
 
        public void TestChar(char c)
         {
+            
+            // Tant que mon nombre d'essai est différent (!=) de 0 
+            while (NombreEssai != 0)
+            {
+            int LettreRestantes = 0;
             Console.Write("Veuillez saisir une lettre : ");
             bool sucessChar = char.TryParse(Console.ReadLine(), out c);
-            //Console.WriteLine($"Le mot à trouver : {motCacher}");
+            if(!sucessChar)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Veuillez entrer un caractére valide.");
+                    Console.ResetColor();
+                    break;
+                }
+            foreach (char characters in motCacher)
+                {
+                    charArray[characters] = characters;
+                    LettreRestantes++;
+                    NombreEssai--;
+                }
+            }
         }
 
+        //Console.WriteLine($"Le mot à trouver : {motCacher}");
         public void TestWin()
         {
 

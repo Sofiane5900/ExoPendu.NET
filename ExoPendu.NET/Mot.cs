@@ -15,6 +15,7 @@ namespace ExoPendu.NET
 
         public List<string> motATrouverList { get { return _motATrouverList; } }
 
+
         public Mot ()
         {
             _motATrouverList = new List<string> {"ordinateur" , "programmation" , "csharp" , "dotnet"};

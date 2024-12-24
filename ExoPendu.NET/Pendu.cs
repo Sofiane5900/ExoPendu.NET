@@ -14,6 +14,7 @@ namespace ExoPendu.NET
         private string _masque;
         private int _nombreEssai;
         private string motCacher;
+        private string _lettresEssayees;
 
         public string masque { get => _masque; set => masque = _masque; }
         public int nombreEssai { get => _nombreEssai; set => nombreEssai = _nombreEssai; }

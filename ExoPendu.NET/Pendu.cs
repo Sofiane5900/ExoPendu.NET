@@ -18,21 +18,18 @@ namespace ExoPendu.NET
         private string _motCacher;
         private char[] _charArray;
         private char[] _masqueArray;
+        private bool _partieGagner;
 
 
         public string Masque { get => _masque; set => Masque = _masque; }
         public int NombreEssai { get => _nombreEssai; set => _nombreEssai = value; }
-
         public string MotCacher { get => _motCacher; set => _motCacher = value; }
-      
+        public bool PartieGagner { get => _partieGagner; set => _partieGagner = value; }
 
         public Pendu()
         {
             // L'utilisateur a 10 essais par default.
             _nombreEssai = 10;
-            
-  ;
-
         }
          
        public void GenererMasque()
@@ -47,7 +44,7 @@ namespace ExoPendu.NET
             // Je déclare que _masqueArray est un nouveau tableau de caractères de la meme longueur que _charArray.Length 
             _masqueArray = new string ('*', _charArray.Length).ToCharArray(); // ToCharArray en tant que Méthode pour convertir une chaine en tableau de char[]
             // Je converti mon tableau de caractére en chaine de caractéres
-            Console.WriteLine($"Le mot à trouver : {new string(_masqueArray)}");
+            
         }
 
         public void TestChar()
@@ -75,12 +72,14 @@ namespace ExoPendu.NET
                     {
                         // Je remplace la saisie de l'utilisateur par la lettre correspondante dans le tableau 
                         _masqueArray[i] = c;
-                        NombreEssai--;
                         // Je convertis mon tableau en une chaine de caractére pour pouvoir l'afficher.
-                        Console.WriteLine($"Le mot caché contient bien ce caractére {new string(_masqueArray)}");
-                        AffichageEtat();
+                        Console.WriteLine($"Le mot à trouver : {new string(_masqueArray)}");
+                        if (!_masqueArray.Contains('*'))
+                        {
+                            TestWin();
+                        }
                     }
-
+                   
                 }
             }
         }
@@ -88,11 +87,14 @@ namespace ExoPendu.NET
         
         public void TestWin()
         {
-
+           
+                PartieGagner = true;
+                Console.WriteLine($"Bravo, vous avez gagner la partie! le mot caché etait {MotCacher}");
         }
 
         public void AffichageEtat()
         {
+            
             Console.WriteLine($"Il vous reste {NombreEssai} essais.");
         }
     }

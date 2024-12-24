@@ -106,6 +106,13 @@ namespace ExoPendu.NET
                 );
                 Console.ResetColor();
             }
+            else if (NombreEssai == 0)
+            {
+                PartieGagner = false;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Vous avez perdu... le mot caché etait {MotCacher}");
+                Console.ResetColor();
+            }
         }
 
         public void AffichageEssai()

@@ -38,7 +38,7 @@ namespace ExoPendu.NET
   ;
 
         }
-
+         
        public void GenererMasque()
         {
             // J'instancie un objet mot de type Mot

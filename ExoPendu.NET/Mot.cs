@@ -11,6 +11,7 @@ namespace ExoPendu.NET
     {
 
         private List<string> _motATrouverList;
+        private string _motATrouver;
 
         public List<string> motATrouverList { get { return _motATrouverList; } }
 
@@ -27,7 +28,6 @@ namespace ExoPendu.NET
             // Je déclare un int index qui prend un nombre aléatoire entre 0 et la taille de ma liste 
             int i = random.Next(0, _motATrouverList.Count);
             return _motATrouverList[i];
-
         }
     }
 }

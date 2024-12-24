@@ -2,3 +2,4 @@
 
 Pendu pendu = new Pendu();
 pendu.GenererMasque();
+pendu.TestChar();

@@ -74,8 +74,11 @@ namespace ExoPendu.NET
                 }
                 for (int i = 0; i < _charArray.Length; i++)
                 {
-                    c = _charArray[i];
-
+                    // A chaque itération, verifie que _charArray contiens le caractére de la saisie de l'user, et affiche un message.
+                    if( _charArray[i] == c)
+                    {
+                        Console.WriteLine("Ce caractére est valide, oui oui!");
+                    }
 
                 }
             }

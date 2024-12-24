@@ -75,6 +75,7 @@ namespace ExoPendu.NET
                     Console.ResetColor();
                     continue;
                 }
+
                 for (int i = 0; i < _charArray.Length; i++)
                 {
                     // A chaque itération, verifie que _charArray contiens le caractére de la saisie de l'user, et affiche un message.
@@ -94,7 +95,7 @@ namespace ExoPendu.NET
                     }
                 }
                 NombreEssai--;
-                AffichageEtat();
+                AffichageEssai();
             }
         }
 
@@ -104,11 +105,52 @@ namespace ExoPendu.NET
             Console.WriteLine($"Bravo, vous avez gagner la partie! le mot caché etait {MotCacher}");
         }
 
-        public void AffichageEtat()
+        public void AffichageEssai()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Il vous reste {NombreEssai} essais.");
             Console.ResetColor();
+        }
+
+        public void IHM()
+        {
+            while (true)
+            {
+                Console.WriteLine("=== Paramétres de partie ===\n");
+                Console.Write("Voulez vous un nombre d'essais spécifique (10 par défaut) ? Y/N :");
+                string choixEssaiDefault = Console.ReadLine();
+                if (choixEssaiDefault == "Y")
+                {
+                    NombreEssai = 10;
+                    break;
+                }
+                else if (choixEssaiDefault == "N")
+                {
+                    Console.Write("Combien voulez vous d'essais ? :");
+                    int choixNombreEssai;
+                    bool successChoixNombreEssai = int.TryParse(
+                        Console.ReadLine(),
+                        out choixNombreEssai
+                    );
+                    if (choixNombreEssai <= 0 || choixNombreEssai > 30)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("Veuillez choisir un nombre d'essai entre 1 et 30.");
+                        Console.ResetColor();
+                        continue;
+                    }
+                    NombreEssai = choixNombreEssai;
+                    break;
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Vous n'etes pas autorisé a effectuer cette action");
+                    Console.ResetColor();
+                }
+            }
         }
     }
 }

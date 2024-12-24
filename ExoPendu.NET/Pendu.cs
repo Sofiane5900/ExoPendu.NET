@@ -62,7 +62,7 @@ namespace ExoPendu.NET
         public void TestChar()
         {
             // Tant que mon nombre d'essai est différent (!=) de 0
-            while (NombreEssai != 0)
+            while (PartieGagner == false && NombreEssai > 0)
             {
                 Console.Write("Veuillez saisir une lettre : ");
                 char c;
@@ -83,26 +83,29 @@ namespace ExoPendu.NET
                     {
                         // Je remplace la saisie de l'utilisateur par la lettre correspondante dans le tableau
                         _masqueArray[i] = c;
-                        // Je convertis mon tableau en une chaine de caractére pour pouvoir l'afficher.
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine($"Le mot à trouver : {new string(_masqueArray)}");
-                        Console.ResetColor();
-
-                        if (!_masqueArray.Contains('*'))
-                        {
-                            TestWin();
-                        }
                     }
                 }
+                // Je convertis mon tableau en une chaine de caractére pour pouvoir l'afficher.
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine($"Le mot à trouver : {new string(_masqueArray)}");
+                Console.ResetColor();
                 NombreEssai--;
                 AffichageEssai();
+                TestWin();
             }
         }
 
         public void TestWin()
         {
-            PartieGagner = true;
-            Console.WriteLine($"Bravo, vous avez gagner la partie! le mot caché etait {MotCacher}");
+            if (!_masqueArray.Contains('*'))
+            {
+                PartieGagner = true;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(
+                    $"Bravo, vous avez gagner la partie! le mot caché etait {MotCacher}"
+                );
+                Console.ResetColor();
+            }
         }
 
         public void AffichageEssai()

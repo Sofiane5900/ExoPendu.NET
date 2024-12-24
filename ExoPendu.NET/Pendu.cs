@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ExoPendu.NET
 {
+
     internal class Pendu
     {
         private string _masque;
@@ -19,6 +21,17 @@ namespace ExoPendu.NET
         {
             _masque = masque;
             _nombreEssai = nombreEssai;
+        }
+
+        void GenererMasque()
+        {
+            Mot mot = new Mot();
+            string motRandom = mot.GenererMot();
+
+            for (int i = 0; i < motRandom.Length; i++)
+            {
+
+            }
         }
     }
 }

@@ -14,19 +14,19 @@ namespace ExoPendu.NET
 
         public List<string> motATrouverList { get { return _motATrouverList; } }
 
-        public Mot (string motATrouverList)
+        public Mot ()
         {
             _motATrouverList = new List<string> {"ordinateur" , "programmation" , "csharp" , "dotnet"};
         }
 
         // Je déclare une method qui return un string
-        string GenererMot()
+       public string GenererMot()
         {
             // J'instancie une variable random de type Random
             Random random = new Random();
             // Je déclare un int index qui prend un nombre aléatoire entre 0 et la taille de ma liste 
-            int motRandom = random.Next(0, _motATrouverList.Count);
-            return _motATrouverList[motRandom];
+            int i = random.Next(0, _motATrouverList.Count);
+            return _motATrouverList[i];
 
         }
     }

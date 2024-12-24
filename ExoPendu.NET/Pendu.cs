@@ -37,9 +37,16 @@ namespace ExoPendu.NET
             motCacher = new string('*', _motATrouver.Length);
         }
 
-       public void TestChar()
+       public void TestChar(char c)
         {
-            Console.WriteLine($"Le mot à trouver : {motCacher}");
+            Console.Write("Veuillez saisir une lettre : ");
+            bool sucessChar = char.TryParse(Console.ReadLine(), out c);
+            //Console.WriteLine($"Le mot à trouver : {motCacher}");
+        }
+
+        public void TestWin()
+        {
+
         }
     }
 }

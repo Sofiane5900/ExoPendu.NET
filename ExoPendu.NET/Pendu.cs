@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.ExceptionServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-namespace ExoPendu.NET
+﻿namespace ExoPendu.NET
 {
     internal class Pendu
     {
-        private string _masque;
+        private char[] _masqueArray;
+        private char[] _charArray;
         private int _nombreEssai;
         private string _motCacher;
-        private char[] _charArray;
-        private char[] _masqueArray;
-        private bool _partieGagner;
+        private bool _partieFini;
 
-        public string Masque
+        public char[] MasqueArray
         {
-            get => _masque;
-            set => Masque = _masque;
+            get => _masqueArray;
+            set => _masqueArray = value;
+        }
+        public char[] CharArray
+        {
+            get => _charArray;
+            set => _charArray = value;
         }
         public int NombreEssai
         {
@@ -33,36 +28,36 @@ namespace ExoPendu.NET
             get => _motCacher;
             set => _motCacher = value;
         }
-        public bool PartieGagner
+        public bool PartieFini
         {
-            get => _partieGagner;
-            set => _partieGagner = value;
+            get => _partieFini;
+            set => _partieFini = value;
         }
 
         public Pendu()
         {
             // L'utilisateur a 10 essais par default.
             _nombreEssai = 10;
+            _masqueArray = MasqueArray;
+            _charArray = CharArray;
         }
 
         public void GenererMasque()
         {
             // J'instancie un objet mot de type Mot
             Mot mot = new Mot();
-            // J'utilise la méthode GenererMot() pour génerer un mot aléatoire dans ma variable motRandom
+            // J'utilise la méthode GenererMot() pour génerer un mot aléatoire et je dis que _motATrouver prend un mot aleatoire.
             string _motATrouver = mot.GenererMot();
             MotCacher = _motATrouver;
             // Je transforme mon _motATrouver en une variable tableau de type char
             _charArray = _motATrouver.ToCharArray();
             // Je déclare que _masqueArray est un nouveau tableau de caractères de la meme longueur que _charArray.Length
-            _masqueArray = new string('*', _charArray.Length).ToCharArray(); // ToCharArray en tant que Méthode pour convertir une chaine en tableau de char[]
-            // Je converti mon tableau de caractére en chaine de caractéres
+            MasqueArray = new string('*', _charArray.Length).ToCharArray(); // ToCharArray en tant que Méthode pour convertir une chaine en tableau de char[]
         }
 
         public void TestChar()
         {
-            // Tant que mon nombre d'essai est différent (!=) de 0
-            while (PartieGagner == false && NombreEssai > 0)
+            while (PartieFini == false && NombreEssai > 0)
             {
                 Console.Write("Veuillez saisir une lettre : ");
                 char c;
@@ -99,16 +94,16 @@ namespace ExoPendu.NET
         {
             if (!_masqueArray.Contains('*'))
             {
-                PartieGagner = true;
+                PartieFini = true;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(
                     $"Bravo, vous avez gagner la partie! le mot caché etait {MotCacher}"
                 );
                 Console.ResetColor();
+                Console.WriteLine("Voulez vous jouez une autre partie ? Y/N");
             }
             else if (NombreEssai == 0)
             {
-                PartieGagner = false;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Vous avez perdu... le mot caché etait {MotCacher}");
                 Console.ResetColor();
@@ -132,6 +127,7 @@ namespace ExoPendu.NET
                 if (choixEssaiDefault == "Y")
                 {
                     NombreEssai = 10;
+                    Console.WriteLine($"Jeu du pendu généré ! Nombre d'essais : {NombreEssai}");
                     break;
                 }
                 else if (choixEssaiDefault == "N")
@@ -151,6 +147,7 @@ namespace ExoPendu.NET
                         continue;
                     }
                     NombreEssai = choixNombreEssai;
+                    Console.WriteLine($"Jeu du pendu généré ! Nombre d'essais : {NombreEssai}");
                     break;
                 }
                 else

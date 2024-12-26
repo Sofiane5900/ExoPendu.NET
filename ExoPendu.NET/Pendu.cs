@@ -36,10 +36,11 @@
 
         public Pendu()
         {
-            // L'utilisateur a 10 essais par default.
-            _nombreEssai = 10;
+            _nombreEssai = 10; // L'utilisateur a 10 essais par default.
             _masqueArray = MasqueArray;
+            _motCacher = string.Empty;
             _charArray = CharArray;
+            _partieFini = PartieFini;
         }
 
         public void GenererMasque()
@@ -100,7 +101,6 @@
                     $"Bravo, vous avez gagner la partie! le mot caché etait {MotCacher}"
                 );
                 Console.ResetColor();
-                Console.WriteLine("Voulez vous jouez une autre partie ? Y/N");
             }
             else if (NombreEssai == 0)
             {
